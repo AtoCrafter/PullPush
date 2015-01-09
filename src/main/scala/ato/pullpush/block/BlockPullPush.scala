@@ -10,6 +10,7 @@ import net.minecraft.world.World
 
 abstract class BlockPullPush extends Block(Material.iron) with ITileEntityProvider {
   setCreativeTab(CreativeTabs.tabBlock)
+  setBlockTextureName("obsidian")
 
   override def onBlockPlacedBy(world: World, x: Int, y: Int, z: Int, entity: EntityLivingBase, itemstack: ItemStack) {
     val meta = entity.rotationPitch match {

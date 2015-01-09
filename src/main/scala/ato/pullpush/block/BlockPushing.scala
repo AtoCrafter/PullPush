@@ -1,12 +1,12 @@
 package ato.pullpush.block
 
-import ato.pullpush.tileentity.TileEntityPulling
+import ato.pullpush.tileentity.TileEntityPushing
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
 
-class BlockPulling extends BlockPullPush {
-  setBlockName("PullBlock")
+class BlockPushing extends BlockPullPush {
+  setBlockName("PushBlock")
 
   override def createNewTileEntity(world: World, meta: Int): TileEntity =
-    new TileEntityPulling()
+    new TileEntityPushing()
 }
