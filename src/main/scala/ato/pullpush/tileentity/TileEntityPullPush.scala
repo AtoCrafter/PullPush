@@ -27,10 +27,12 @@ abstract class TileEntityPullPush extends TileEntity {
     val k = getForce
     val (cx, cy, cz) = (xCoord + 0.5, yCoord + 0.5, zCoord + 0.5)
     for (e <- entities.asScala) {
-      val dist = sqrt(pow(e.posX - cx, 2) + pow(e.posY - cy, 2) + pow(e.posZ - cz, 2))
-      if (dist < getRange) {
-        val dist2 = pow(max(dist, 1.5), 2)
-        e.addVelocity(k * dir.offsetX / dist2, k * dir.offsetY / dist2, k * dir.offsetZ / dist2)
+      if (!e.isSneaking) {
+        val dist = sqrt(pow(e.posX - cx, 2) + pow(e.posY - cy, 2) + pow(e.posZ - cz, 2))
+        if (dist < getRange) {
+          val dist2 = pow(max(dist, 1.5), 2)
+          e.addVelocity(k * dir.offsetX / dist2, k * dir.offsetY / dist2, k * dir.offsetZ / dist2)
+        }
       }
     }
   }
