@@ -9,4 +9,6 @@ class BlockPushing extends BlockPullPush {
 
   override def createNewTileEntity(world: World, meta: Int): TileEntity =
     new TileEntityPushing()
+
+  override def faceTextureName: String = "emerald_block"
 }

@@ -1,14 +1,18 @@
 package ato.pullpush.block
 
+import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.material.Material
 import net.minecraft.block.{Block, ITileEntityProvider}
+import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.ItemStack
-import net.minecraft.util.MathHelper
+import net.minecraft.util.{IIcon, MathHelper}
 import net.minecraft.world.World
 
 abstract class BlockPullPush extends Block(Material.iron) with ITileEntityProvider {
+  var faceIcon: IIcon = _
+
   setCreativeTab(CreativeTabs.tabBlock)
   setBlockTextureName("obsidian")
 
@@ -25,4 +29,15 @@ abstract class BlockPullPush extends Block(Material.iron) with ITileEntityProvid
     }
     world.setBlockMetadataWithNotify(x, y, z, meta, 2)
   }
+
+  @SideOnly(Side.CLIENT)
+  override def getIcon(side: Int, meta: Int): IIcon = if (side == meta) faceIcon else super.getIcon(side, meta)
+
+  @SideOnly(Side.CLIENT)
+  override def registerBlockIcons(register: IIconRegister): Unit = {
+    super.registerBlockIcons(register)
+    faceIcon = register.registerIcon(faceTextureName)
+  }
+
+  def faceTextureName: String
 }
